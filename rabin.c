@@ -1,92 +1,15 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <time.h>
+#include "rabin.h"
 
-void divide(int* matrix1, int* matrix2, int k, int p, int n)
-{
-	int tmp = 0;
-	for (int i = 0; i < k - n; i++)
-	{
-		tmp = matrix1[i];
-
-		for (int j = 0; j < n + 1; j++)
-		{
-			matrix1[i + j] = (matrix1[i + j] - tmp * matrix2[j]) % p;
-		}
-		/*
-		for (int j = 0; j < k + 1; j++)
-		{P
-			printf(" %d", matrix1[j]);
-		}
-		printf("\n");
-		*/
-	}
-
-
-}
-
-void divide1(int* matrix1, int* matrix2, int k, int p, int n, int tmp1, int tmp2)
-{
-	printf("i am divide 1\n");
-	int tmp = 0;
-	for (int i = 0; i <= tmp1 - tmp2; i++)
-	{
-		tmp = matrix1[k + 1 - tmp1 + i];
-
-		for (int j = 0; j < tmp2; j++)
-		{
-			matrix1[k + 1 - tmp1 + i + j] = ((matrix2[n + 1 - tmp2] * matrix1[k + 1 - tmp1 + i + j] - tmp * matrix2[n + 1 - tmp2 + j]) + p) % p;
-		}
-	}
-	/*
-	printf("GF :");
-	for (int j = 0; j < k + 1; j++)
-	{
-		printf(" %d", matrix1[j]);
-	}
-	printf("\n");
-	*/
-
-}
-
-void divide2(int* matrix1, int* matrix2, int k, int p, int n, int tmp1, int tmp2)
-{
-	printf("i am divide 2\n");
-
-
-
-
-
-	int tmp = 0;
-	for (int i = 0; i <= tmp2 - tmp1; i++)
-	{
-		tmp = matrix1[n + 1 - tmp2 + i];
-
-		for (int j = 0; j < tmp1; j++)
-		{
-			matrix1[n + 1 - tmp2 + i + j] = ((matrix1[n + 1 - tmp2 + i + j] * matrix2[k + 1 - tmp1] - tmp * matrix2[k + 1 - tmp1 + j]) + p) % p;
-		}
-
-	}
-	/*
-	printf("f :");
-	for (int j = 0; j < n + 1; j++)
-	{
-		printf(" %d", matrix1[j]);
-	}
-	printf("\n");
-	*/
-}
 
 void test()
 {
 	int check = 0;
 	int p = 0; int n = 0; int a = 0; int tmp = 0; int b = 0; int c = 0;
 
-	printf("¼Ò¼ö¸¦ ÀÔ·ÂÇØ ÁÖ¼¼¿ä : ");
-	scanf_s("%d", &p);
-	printf("Â÷¼ö¸¦ ÀÔ·ÂÇØ ÁÖ¼¼¿ä : ");
-	scanf_s("%d", &n);
+	printf("enter prime number : ");
+	scanf("%d", &p);
+	printf("enter degree : ");
+	scanf("%d", &n);
 
 	int k = 1;
 
@@ -99,7 +22,7 @@ void test()
 
 	int cnt = 0;
 
-	// nÀÇ ¾à¼öµé °è»ê ½ÃÀÛ
+	// nì˜ ì•½ìˆ˜ë“¤ ê³„ì‚° ì‹œìž‘
 	for (int i = 1; i < n; i++)
 	{
 		if (n % i == 0)
@@ -113,11 +36,11 @@ void test()
 	{
 		printf("gf[%d] = %d\n", i, gf[i]);
 	}
-	printf("cnt = %d\n", cnt); // cnt´Â nÀÇ ¾à¼öÀÇ °³¼öÀÌ°í gf[i]µéÀº °¢°¢ nÀÇ ¾à¼ö°¡ µé¾î°¡ÀÖ´Ù.
+	printf("cnt = %d\n", cnt); // cntëŠ” nì˜ ì•½ìˆ˜ì˜ ê°œìˆ˜ì´ê³  gf[i]ë“¤ì€ ê°ê° nì˜ ì•½ìˆ˜ê°€ ë“¤ì–´ê°€ìžˆë‹¤.
 
 	for (int i = 0; i < cnt; i++)
 	{
-		//gf[i]ÀÇ ¼ýÀÚ¸¦ pÀÇ  gf[i]Á¦°öÀ¸·Î ¹Ù²ãÁà¾ß ÇÑ´Ù.
+		//gf[i]ì˜ ìˆ«ìžë¥¼ pì˜  gf[i]ì œê³±ìœ¼ë¡œ ë°”ê¿”ì¤˜ì•¼ í•œë‹¤.
 		tmp = 1;
 		for (int j = 0; j < gf[i]; j++)
 		{
@@ -136,10 +59,10 @@ void test()
 	int* f1 = (int*)calloc(sizeof(int), (n + 1));
 	int* GF = (int*)calloc(sizeof(int), (k + 1));
 
-	printf("ÆÇº°ÇÏ°íÀÚ ÇÏ´Â ´ÙÇ×½ÄÀ» ÀÔ·ÂÇØ ÁÖ¼¼¿ä :\n");
+	printf("enter polynomial which want to check :\n");
 	for (int i = 0; i < n + 1; i++)
 	{
-		scanf_s("%d", &f[i]);
+		scanf("%d", &f[i]);
 	}
 	printf("\n");
 
@@ -190,7 +113,7 @@ void test()
 					break;
 				}
 			}
-			printf("tmp1 = %d, tmp2 = %d\n", tmp1, tmp2);
+			// printf("tmp1 = %d, tmp2 = %d\n", tmp1, tmp2);
 
 
 			for (int m = 0; m < k + 1; m++)
@@ -332,7 +255,6 @@ void test()
 	free(GF);
 	free(f);
 	free(f1);
-	return 0;
 }
 
 void make()
@@ -340,12 +262,12 @@ void make()
 	int check1 = 0;
 	int p = 0; int n = 0; int a = 0; int tmp = 0; int b = 0; int c = 0;
 
-	srand(time(NULL));
+	srand((unsigned)time(NULL));
 
-	printf("¼Ò¼ö¸¦ ÀÔ·ÂÇØ ÁÖ¼¼¿ä : ");
-	scanf_s("%d", &p);
-	printf("Â÷¼ö¸¦ ÀÔ·ÂÇØ ÁÖ¼¼¿ä : ");
-	scanf_s("%d", &n);
+	printf("enter prime number : ");
+	scanf("%d", &p);
+	printf("enter it's degree : ");
+	scanf("%d", &n);
 
 	int k = 1;
 
@@ -358,7 +280,7 @@ void make()
 
 	int cnt = 0;
 
-	// nÀÇ ¾à¼öµé °è»ê ½ÃÀÛ
+	// nì˜ ì•½ìˆ˜ë“¤ ê³„ì‚° ì‹œìž‘
 	for (int i = 1; i < n; i++)
 	{
 		if (n % i == 0)
@@ -372,11 +294,11 @@ void make()
 	{
 		printf("gf[%d] = %d\n", i, gf[i]);
 	}
-	printf("cnt = %d\n", cnt); // cnt´Â nÀÇ ¾à¼öÀÇ °³¼öÀÌ°í gf[i]µéÀº °¢°¢ nÀÇ ¾à¼ö°¡ µé¾î°¡ÀÖ´Ù.
+	printf("cnt = %d\n", cnt); // cntëŠ” nì˜ ì•½ìˆ˜ì˜ ê°œìˆ˜ì´ê³  gf[i]ë“¤ì€ ê°ê° nì˜ ì•½ìˆ˜ê°€ ë“¤ì–´ê°€ìžˆë‹¤
 
 	for (int i = 0; i < cnt; i++)
 	{
-		//gf[i]ÀÇ ¼ýÀÚ¸¦ pÀÇ  gf[i]Á¦°öÀ¸·Î ¹Ù²ãÁà¾ß ÇÑ´Ù.
+		//gf[i]ì˜ ìˆ«ìžë¥¼ pì˜  gf[i]ì œê³±ìœ¼ë¡œ ë°”ê¿”ì¤˜ì•¼ í•œë‹¤.
 		tmp = 1;
 		for (int j = 0; j < gf[i]; j++)
 		{
@@ -452,7 +374,7 @@ void make()
 						break;
 					}
 				}
-				printf("tmp1 = %d, tmp2 = %d\n", tmp1, tmp2);
+				// printf("tmp1 = %d, tmp2 = %d\n", tmp1, tmp2);
 
 
 				for (int m = 0; m < k + 1; m++)
@@ -568,40 +490,4 @@ void make()
 	free(GF);
 	free(f);
 	free(f1);
-	return 0;
-}
-
-int main()
-{
-	int z = 0;
-
-	while (1)
-	{
-		system("cls");
-		printf("¹«¾ùÀ» ÇÏ°í½ÍÀ¸½Å°¡¿ä?\n1. ±â¾à ÆÇÁ¤\n2. ±â¾à »ý¼º\n3. ¹ßÇ¥ ³¡\n");
-		system("pause");
-
-		scanf_s("%d", &z);
-
-		system("cls");
-
-
-		if (z == 1)
-		{
-			test();
-			system("pause");
-		}
-		else if (z == 2)
-		{
-			make();
-			system("pause");
-		}
-		else
-		{
-			printf("°¨»çÇÕ´Ï´Ù.\n");
-			break;
-		}
-	}
-
-	return 0;
 }

@@ -1,5 +1,0 @@
-﻿  main.c
-C:\Users\pizza\source\repos\Irreducible Polynomial\main.c(335,10): warning C4098: 'test': 'void' 함수에서 값을 반환하고 있습니다.
-C:\Users\pizza\source\repos\Irreducible Polynomial\main.c(343,18): warning C4244: '함수': 'time_t'에서 'unsigned int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\pizza\source\repos\Irreducible Polynomial\main.c(571,10): warning C4098: 'make': 'void' 함수에서 값을 반환하고 있습니다.
-  Irreducible Polynomial.vcxproj -> C:\Users\pizza\source\repos\Irreducible Polynomial\Debug\Irreducible Polynomial.exe
